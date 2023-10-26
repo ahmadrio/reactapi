@@ -1,7 +1,5 @@
+import Main from "../../layouts/Main";
+
 export default function Index() {
-  return (
-    <div>
-      <h1>Index Users</h1>
-    </div>
-  );
+  return <Main>User Index</Main>;
 }
