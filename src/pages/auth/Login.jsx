@@ -1,18 +1,21 @@
 import { useEffect, useState } from "react";
-import { auth, axios } from "../../utils/auth";
+import { axios } from "../../utils/auth";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
-  useEffect(() => {
-    auth().then(() => {
-      window.location.href = "/";
-    });
-  }, []);
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [emailValidation, setEmailValidation] = useState("");
   const [validationMessage, setValidationMessage] = useState([]);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      navigate("/");
+    }
+  }, [navigate]);
 
   const handlerSubmit = async (event) => {
     event.preventDefault();
@@ -30,6 +33,7 @@ export default function Login() {
         setEmail("");
         setPassword("");
 
+        // pastikan setelah login berhasil menggunakan window.location.href agar keload semua halaman
         window.location.href = "/";
       })
       .catch((err) => {

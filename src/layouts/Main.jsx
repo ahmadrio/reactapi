@@ -1,16 +1,23 @@
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import { auth, axios } from "../utils/auth";
+import { useEffect } from "react";
 
 export default function Main({ children }) {
-  let logged = auth();
-  logged.catch(() => (window.location.href = "/auth/login"));
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      navigate("/auth/login");
+    }
+
+    auth().catch(() => navigate("/auth/login"));
+  }, [navigate]);
 
   const handleLogout = async (e) => {
     e.preventDefault();
 
     await axios.post("/logout").then(() => {
       localStorage.removeItem("token");
-      window.location.href = "/auth/login";
+      navigate("/auth/login");
     });
   };
 
