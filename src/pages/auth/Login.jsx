@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { auth, axios } from "../../utils/auth";
 
 export default function Login() {
-  auth().then(() => {
-    window.location.href = "/";
-  });
+  useEffect(() => {
+    auth().then(() => {
+      window.location.href = "/";
+    });
+  }, []);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

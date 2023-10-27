@@ -17,5 +17,8 @@ export const axios = Axios.create({
   headers: {
     "Content-type": "application/json",
     Accept: "application/json",
+    Authorization: localStorage.getItem("token")
+      ? "Bearer " + localStorage.getItem("token")
+      : "",
   },
 });
