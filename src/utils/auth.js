@@ -6,8 +6,6 @@ export function auth() {
     {},
     {
       headers: {
-        "Content-type": "application/json",
-        Accept: "application/json",
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
     },
