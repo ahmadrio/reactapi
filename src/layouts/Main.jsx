@@ -12,8 +12,8 @@ export default function Main({ children }) {
     auth().catch(() => navigate("/auth/login"));
   }, [navigate]);
 
-  const handleLogout = async (e) => {
-    e.preventDefault();
+  const handleLogout = async (event) => {
+    event.preventDefault();
 
     await axios.post("/logout").then(() => {
       localStorage.removeItem("token");
@@ -49,13 +49,12 @@ export default function Main({ children }) {
                 </NavLink>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
                   onClick={handleLogout}
                   className="hover:bg-red-700 px-4 py-2 rounded-md transition-all"
                 >
                   Logout
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
