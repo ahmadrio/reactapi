@@ -1,9 +1,9 @@
 import { NavLink, Link, Navigate } from "react-router-dom";
-import auth from "../mixins/auth";
+import { auth } from "../utils/auth";
 
-// eslint-disable-next-line react/prop-types
 export default function Main({ children }) {
   let logged = auth();
+  logged.catch(() => (window.location.href = "/auth/login"));
 
   return (
     <>
